@@ -1,0 +1,6 @@
+Flask==2.3.2
+Flask-SocketIO==6.4.2
+eventlet==0.33.3
+SQLAlchemy==2.0.22
+python-dotenv==1.0.0
+Werkzeug==3.0.0
