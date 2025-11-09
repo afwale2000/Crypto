@@ -1,0 +1,92 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Mining Demo</title>
+  <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+  <style>
+    body { font-family: Arial, sans-serif; margin:20px; }
+    .col { float:left; padding:10px; }
+    .left { width: 60%; }
+    .right { width: 35%; }
+    .card { border:1px solid #ddd; padding:10px; margin-bottom:10px; border-radius:6px; box-shadow: 0 2px 3px rgba(0,0,0,0.03); }
+    input, button, textarea { padding:8px; margin:4px 0; width:100%; box-sizing:border-box; }
+    #chat { height:200px; overflow:auto; background:#fafafa; padding:6px; }
+    .msg { margin-bottom:6px; }
+    .small { font-size:12px; color:#666; }
+    .balances { max-height:200px; overflow:auto; }
+    .kbd { font-family: monospace; background:#eee; padding:2px 6px; border-radius:4px; }
+  </style>
+</head>
+<body>
+  <h1>Mining Demo</h1>
+
+  <div class="col left">
+    <div class="card">
+      <h3>Account</h3>
+      <div id="accountArea">
+        <div id="authForms">
+          <input id="reg_username" placeholder="username" />
+          <input id="reg_password" placeholder="password" type="password" />
+          <button id="btnRegister">Register</button>
+          <hr/>
+          <input id="login_username" placeholder="username" />
+          <input id="login_password" placeholder="password" type="password" />
+          <button id="btnLogin">Login</button>
+        </div>
+        <div id="meArea" style="display:none;">
+          <div><strong>Logged in as</strong> <span id="me_username"></span></div>
+          <div>Wallet: <span id="me_wallet"></span> <span class="small">(<span id="me_balance">0</span>)</span></div>
+          <button id="btnStartMining">Start Mining (join)</button>
+          <button id="btnStopMining" style="display:none">Stop Mining (leave)</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Miner Controls</h3>
+      <div>Miner Session ID: <span id="miner_session_id">-</span></div>
+      <div>Active miners: <span id="miners_count">0</span></div>
+      <div>Total shares (pool): <span id="total_shares">0</span></div>
+      <button id="btnSubmitShare" disabled>Submit One Share</button>
+      <button id="btnAutoMine" disabled>Start Auto-Mining</button>
+      <button id="btnStopAuto" style="display:none">Stop Auto-Mining</button>
+      <div class="small">Auto-mining will send a share every 3 seconds (simulated).</div>
+    </div>
+
+    <div class="card">
+      <h3>Chat</h3>
+      <div id="chat"></div>
+      <input id="chat_input" placeholder="message" />
+      <button id="btnSendChat" disabled>Send</button>
+    </div>
+  </div>
+
+  <div class="col right">
+    <div class="card">
+      <h3>Balances</h3>
+      <div class="balances" id="balances"></div>
+    </div>
+
+    <div class="card">
+      <h3>Payout (admin)</h3>
+      <input id="payout_amount" placeholder="Total reward amount (e.g. 100)" />
+      <button id="btnPayout">Run Payout (proportional)</button>
+      <div id="payout_result"></div>
+    </div>
+
+    <div class="card">
+      <h3>Quick Help</h3>
+      <div class="small">
+        - Register then login. Click <span class="kbd">Start Mining</span> to join pool.<br/>
+        - Use <span class="kbd">Submit One Share</span> or <span class="kbd">Start Auto-Mining</span> to simulate shares.<br/>
+        - Run a payout to distribute the entered total reward proportionally to shares.<br/>
+      </div>
+    </div>
+  </div>
+
+  <div style="clear:both"></div>
+
+  <script src="/static/client.js"></script>
+</body>
+</html>
